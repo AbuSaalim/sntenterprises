@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Design System &amp; Component Styleguide | SNT Enterprises</title>
+
+  <script>
+    document.documentElement.classList.remove('no-js');
+    document.documentElement.classList.add('js');
+  </script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
+  <!-- Preconnect & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Pinned CDN Stylesheets -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
+
+  <!-- Core Theme Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <style>
+    .swatch-card {
+      border: 1px solid var(--line);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .swatch-box {
+      height: 64px;
+      width: 100%;
+      border: 1px solid rgba(0,0,0,0.1);
+    }
+    .styleguide-section {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--line);
+    }
+  </style>
+</head>
+<body class="bg-white">
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="section--graphite py-4 border-bottom border-secondary">
+    <div class="container-snt d-flex justify-content-between align-items-center">
+      <div class="brand">
+        <img src="assets/images/logo-white.png" alt="SNT Enterprises Logo" class="brand__logo" width="48" height="51">
+        <span class="brand__text-wrap">
+          <span class="brand__title">SNT ENTERPRISES</span>
+          <span class="brand__tagline">STYLEGUIDE &bull; MATERIAL SPEC</span>
+        </span>
+      </div>
+      <span class="badge bg-secondary font-monospace text-uppercase p-2">Styleguide (Internal)</span>
+    </div>
+  </header>
+
+  <main id="main-content" class="container-snt py-5">
+    
+    <!-- SECTION 1: BRAND IDENTITY -->
+    <section class="styleguide-section">
+      <span class="eyebrow">Component 01</span>
+      <h2 class="mb-4">Brand Identity (.brand)</h2>
+      <p class="text-muted mb-4">Official SNT Enterprises Emblem and Spec Typography. Transparent PNG with isolated metallic elements, circular steel chain, and golden spearhead.</p>
+
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="p-4 bg-dark text-white border border-dark">
+            <span class="eyebrow eyebrow--light d-block mb-3">On Dark Surface (Midnight Navy / Steel)</span>
+            <a href="#" class="brand">
+              <img src="assets/images/logo-white.png" alt="SNT Enterprises Logo" class="brand__logo" width="48" height="51">
+              <span class="brand__text-wrap">
+                <span class="brand__title">SNT ENTERPRISES</span>
+                <span class="brand__tagline">INDUSTRIAL SCRAP TRADING &bull; MUMBAI</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="p-4 bg-light border">
+            <span class="eyebrow d-block mb-3">On Light Surface (Ice Steel / White)</span>
+            <a href="#" class="brand brand--light">
+              <img src="assets/images/logo.png" alt="SNT Enterprises Logo" class="brand__logo" width="48" height="51">
+              <span class="brand__text-wrap">
+                <span class="brand__title">SNT ENTERPRISES</span>
+                <span class="brand__tagline">INDUSTRIAL SCRAP TRADING &bull; MUMBAI</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: COLOUR PALETTE -->
+    <section class="styleguide-section">
+      <span class="eyebrow">Component 02</span>
+      <h2 class="mb-4">Colour System (Logo-Derived Industrial Palette)</h2>
+      <p class="text-muted mb-4">Precision industrial palette derived directly from client's official emblem: Antique Industrial Gold spearhead, Midnight Industrial Navy base, and Ice Steel highlights.</p>
+
+      <div class="row row-cols-2 row-cols-md-4 g-3">
+        <div class="col">
+          <div class="swatch-card">
+            <div class="swatch-box" style="background-color: #0E1724;"></div>
+            <strong class="font-monospace">--navy</strong>
+            <span class="small text-muted">#0E1724 (Midnight Navy Base)</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="swatch-card">
+            <div class="swatch-box" style="background-color: #1C2A3A;"></div>
+            <strong class="font-monospace">--steel-navy</strong>
+            <span class="small text-muted">#1C2A3A (Secondary Dark)</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="swatch-card">
+            <div class="swatch-box" style="background-color: #080E17;"></div>
+            <strong class="font-monospace">--navy-deep</strong>
+            <span class="small text-muted">#080E17 (Footer Deep Dark)</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="swatch-card">
+            <div class="swatch-box" style="background-color: #C59B27;"></div>
+            <strong class="font-monospace">--gold</strong>
+            <span class="small text-muted">#C59B27 (Brand Gold Accent)</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="swatch-card">
+            <div class="swatch-box" style="background-color: #A37E18;"></div>
+            <strong class="font-monospace">--gold-dark</strong>
+            <span class="small text-muted">#A37E18 (Interactive Hover)</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="swatch-card">
+            <div class="swatch-box" style="background-color: #E8CF7C;"></div>
+            <strong class="font-monospace">--gold-light</strong>
+            <span class="small text-muted">#E8CF7C (Dark UI Accents)</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="swatch-card">
+            <div class="swatch-box" style="background-color: #455767;"></div>
+            <strong class="font-monospace">--slate-blue</strong>
+            <span class="small text-muted">#455767 (Monogram Fill Blue)</span>
+          </div>
+        </div>
+        <div class="col">
+          <div class="swatch-card">
+            <div class="swatch-box" style="background-color: #EFF3F8; border: 1px solid #ddd;"></div>
+            <strong class="font-monospace">--alu</strong>
+            <span class="small text-muted">#EFF3F8 (Ice Steel Surface)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: TYPOGRAPHY HIERARCHY -->
+    <section class="styleguide-section">
+      <span class="eyebrow">Component 03</span>
+      <h2 class="mb-4">Typography Scale</h2>
+      <div class="mb-4">
+        <h1 class="mb-1">Heading 1 — Barlow Condensed 700 Uppercase</h1>
+        <span class="small text-muted font-monospace">H1 / 68px clamp / line-height 1.05</span>
+      </div>
+      <div class="mb-4">
+        <h2 class="mb-1">Heading 2 — Barlow Condensed 700 Uppercase</h2>
+        <span class="small text-muted font-monospace">H2 / 48px clamp / line-height 1.1</span>
+      </div>
+      <div class="mb-4">
+        <h3 class="mb-1">Heading 3 — Barlow Condensed 600</h3>
+        <span class="small text-muted font-monospace">H3 / 32px clamp / line-height 1.2</span>
+      </div>
+      <div class="mb-4">
+        <p class="lead-text mb-1">Body Lead — IBM Plex Sans 500, 20px. Used for introductory brief statements and featured overview paragraphs.</p>
+        <span class="small text-muted font-monospace">.lead-text / 20px / line-height 1.6</span>
+      </div>
+      <div class="mb-4">
+        <p class="mb-1">Body Text — IBM Plex Sans 400, 17px. SNT Enterprises is a Mumbai-based industrial scrap trading and material sourcing company specializing in the procurement, trading, and supply of ferrous metals, non-ferrous metals, electrical scrap, and industrial surplus materials.</p>
+        <span class="small text-muted font-monospace">p / 17px / line-height 1.65 / max 68ch</span>
+      </div>
+      <div class="mb-4">
+        <p class="mono mb-1 text-uppercase">Catalogue Spec Code — IBM Plex Mono 500: A01-ALU-EXTRUSION / LOT #9824</p>
+        <span class="small text-muted font-monospace">.mono / 14px / letter-spacing 0.05em</span>
+      </div>
+    </section>
+
+    <!-- SECTION 4: BUTTONS & ARROW LINKS -->
+    <section class="styleguide-section">
+      <span class="eyebrow">Component 04</span>
+      <h2 class="mb-4">Buttons &amp; Links</h2>
+      <div class="d-flex flex-wrap gap-3 align-items-center mb-4">
+        <a href="#" class="btn-snt">Primary Button (.btn-snt)</a>
+        <a href="#" class="btn-snt-outline">Secondary Outline (.btn-snt-outline)</a>
+        <a href="#" class="link-arrow">Link with Arrow (.link-arrow) <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="p-4 bg-dark text-white d-flex flex-wrap gap-3 align-items-center">
+        <a href="#" class="btn-snt">Primary on Dark</a>
+        <a href="#" class="btn-snt-outline-light">Outline Light (.btn-snt-outline-light)</a>
+      </div>
+    </section>
+
+    <!-- SECTION 5: SPEC STRIP & RULES -->
+    <section class="styleguide-section">
+      <span class="eyebrow">Component 05</span>
+      <h2 class="mb-4">Spec Strip &amp; Copper Rules</h2>
+      <div class="rule rule--copper mb-4"></div>
+      <div class="bg-dark p-4">
+        <div class="spec-strip">
+          <div class="spec-strip__cell">
+            <span class="spec-strip__label">Business Type</span>
+            <span class="spec-strip__value">Industrial Scrap Trading &amp; Supply</span>
+          </div>
+          <div class="spec-strip__cell">
+            <span class="spec-strip__label">Location</span>
+            <span class="spec-strip__value">Mumbai, Maharashtra, India</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: LEDGER ROWS -->
+    <section class="styleguide-section">
+      <span class="eyebrow">Component 06</span>
+      <h2 class="mb-4">Ledger Table (.ledger)</h2>
+      <p class="text-muted mb-3">Structured, numbered spec rows without card containers.</p>
+
+      <div class="ledger">
+        <a href="#" class="ledger__row">
+          <span class="ledger__no">01</span>
+          <h3 class="ledger__title">Industrial Scrap Trading</h3>
+          <span class="ledger__action"><i class="bi bi-arrow-up-right"></i></span>
+        </a>
+        <a href="#" class="ledger__row">
+          <span class="ledger__no">02</span>
+          <h3 class="ledger__title">Government &amp; Private Auction Procurement</h3>
+          <span class="ledger__action"><i class="bi bi-arrow-up-right"></i></span>
+        </a>
+        <a href="#" class="ledger__row">
+          <span class="ledger__no">03</span>
+          <h3 class="ledger__title">Bulk Metal Scrap Supply</h3>
+          <span class="ledger__action"><i class="bi bi-arrow-up-right"></i></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 7: MARKER LIST -->
+    <section class="styleguide-section">
+      <span class="eyebrow">Component 07</span>
+      <h2 class="mb-4">Marker List (.marker-list)</h2>
+      <p class="text-muted mb-3">Ruled list with 8px square copper bullets.</p>
+
+      <ul class="marker-list">
+        <li class="marker-list__item">Aluminium Foundries &amp; Extrusion Manufacturers</li>
+        <li class="marker-list__item">Copper &amp; Brass Recycling Industries</li>
+        <li class="marker-list__item">Stainless Steel Traders &amp; Processors</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 8: IMAGE SLOTS -->
+    <section class="styleguide-section">
+      <span class="eyebrow">Component 08</span>
+      <h2 class="mb-4">Image Slots (.img-slot)</h2>
+      <p class="text-muted mb-3">Pre-allocated responsive slots with corner marks, smooth lazy-loading images, and zero-layout-shift fallback placeholders.</p>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="mb-2 small font-monospace text-muted">Active Image (4:3)</div>
+          <div class="img-slot img-slot--4-3">
+            <img src="assets/images/aluminium.jpg" alt="Aluminium extrusion &amp; sheet scrap" width="600" height="450" loading="lazy">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-2 small font-monospace text-muted">Active Image (16:9)</div>
+          <div class="img-slot img-slot--16-9">
+            <img src="assets/images/bulk-loading.jpg" alt="Bulk scrap stock &amp; loading" width="600" height="338" loading="lazy">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-2 small font-monospace text-muted">Fallback Slot (Corner Marks &amp; Label)</div>
+          <div class="img-slot img-slot--4-3">
+            <div class="img-slot__placeholder">
+              <span class="img-slot__label">PHOTO: Fallback placeholder specification (4:3)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 9: DATA-CONFIG LEAKAGE PREVENTION DEMO -->
+    <section class="styleguide-section border-bottom-0">
+      <span class="eyebrow">Component 09</span>
+      <h2 class="mb-4">Data-Config Concealment Rule</h2>
+      <p class="text-muted mb-3">Elements with <code>data-config="phone"</code> or <code>data-config="email"</code> remain strictly hidden when empty. No "[To be added]" or broken UI will ever leak to users.</p>
+
+      <div class="p-4 bg-light border">
+        <div class="mb-2">
+          <strong>Static content:</strong> Company Name: SNT Enterprises
+        </div>
+        <div class="mb-2" data-config="phone">
+          <strong>Conditional Phone:</strong> <a href="#" data-config-value></a>
+        </div>
+        <div class="mb-2" data-config="email">
+          <strong>Conditional Email:</strong> <a href="#" data-config-value></a>
+        </div>
+        <span class="small text-muted font-monospace d-block mt-3">(Notice: Phone and Email rows above are currently completely invisible because values in site-config.js are empty.)</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pinned CDN Scripts (Deferred) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script defer src="assets/js/site-config.js"></script>
+  <script defer src="assets/js/main.js"></script>
+</body>
+</html>
+

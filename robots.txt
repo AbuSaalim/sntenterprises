@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /styleguide.html
+
+Sitemap: https://sntenterprises.com/sitemap.xml
+

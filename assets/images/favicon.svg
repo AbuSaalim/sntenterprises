@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Midnight Industrial Navy Background -->
+  <rect width="64" height="64" fill="#0E1724" />
+  
+  <!-- Outer Chain Circle Guide -->
+  <circle cx="32" cy="32" r="28" fill="none" stroke="#2B3E54" stroke-width="2"/>
+  <circle cx="32" cy="32" r="28" fill="none" stroke="#C59B27" stroke-width="1.5" stroke-dasharray="4, 3"/>
+  
+  <!-- Spearhead Upward Arrow (Gold/Brass #C59B27) -->
+  <path d="M 32 7 L 43 23 L 36 23 L 36 34 L 28 34 L 28 23 L 21 23 Z" fill="#C59B27" stroke="#E8CF7C" stroke-width="0.75" />
+  <!-- Bevel Shadow on Left of Spearhead -->
+  <path d="M 32 7 L 21 23 L 28 23 L 28 34 L 32 34 Z" fill="#9E7A18" opacity="0.6"/>
+  
+  <!-- SNT Monogram Text -->
+  <text x="32" y="47" font-family="'Barlow Condensed', 'Arial Black', sans-serif" font-weight="700" font-size="16" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">SNT</text>
+  
+  <!-- Bottom Accent Bar -->
+  <rect x="20" y="52" width="24" height="2" fill="#C59B27" />
+</svg>

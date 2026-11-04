@@ -1,0 +1,1707 @@
+/* ==========================================================================
+   SNT ENTERPRISES — INDUSTRIAL SPEC-SHEET DESIGN SYSTEM
+   Tech Stack: HTML5 / CSS3 / Bootstrap 5.3 CDN / jQuery 3.7 / GSAP 3.12
+   Design Concept: Industrial Ledger / Material Catalogue / Spec-Sheet
+   Zero gradients. Zero shadows. Zero rounded corners. Absolute precision.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DESIGN TOKENS & BOOTSTRAP OVERRIDES
+   -------------------------------------------------------------------------- */
+/* Official Lenis Smooth Scroll Rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip !important;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+html {
+  overflow-x: clip;
+}
+
+:root {
+  /* Logo-Derived Industrial Color Palette (Strictly Flat) */
+  /* Primary Accent: Antique Industrial Gold / Brass (from Client Logo Spearhead & Bevels) */
+  --gold: #C59B27;          /* Rich antique brass gold */
+  --gold-dark: #A37E18;     /* Interactive hover state */
+  --gold-light: #E8CF7C;    /* Highlights & meta on dark surfaces */
+  --gold-subtle: rgba(197, 155, 39, 0.12);
+
+  /* Primary Dark Surfaces: Midnight Navy (from Logo ENTERPRISES & Steel Shadows) */
+  --navy: #0E1724;          /* Midnight Industrial Navy (replaces graphite) */
+  --steel-navy: #1C2A3A;    /* Secondary dark / panels (replaces steel) */
+  --navy-deep: #080E17;     /* Deepest midnight navy (replaces ink footer) */
+  --slate-blue: #455767;    /* Slate metallic blue (from SNT monogram fill) */
+
+  /* Backwards-Compatible Palette Aliases */
+  --graphite: var(--navy);
+  --steel: var(--steel-navy);
+  --ink: var(--navy-deep);
+  --copper: var(--gold);
+  --copper-dark: var(--gold-dark);
+  --copper-light: var(--gold-light);
+
+  /* Light Surfaces: Cool Ice Steel & Crisp White */
+  --alu: #EFF3F8;           /* Cool Ice Steel surface */
+  --white: #FFFFFF;         /* Crisp catalogue background */
+  --line: #D0DAE5;          /* 1px light hairline divider */
+  --line-dark: #243548;     /* 1px dark hairline divider */
+  --muted: #5A6B7C;         /* Secondary meta & caption text */
+  --error: #B42318;         /* High-contrast validation alert */
+
+  /* Typography Stack */
+  --font-heading: 'Barlow Condensed', -apple-system, sans-serif;
+  --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Spacing Scale (8px Grid) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+
+  /* Layout & Navigation Dimensions */
+  --container-max: 1280px;
+  --header-height: 84px;
+  --header-height-scrolled: 64px;
+
+  /* Bootstrap Variable Overrides */
+  --bs-primary: #C59B27;
+  --bs-primary-rgb: 197, 155, 39;
+  --bs-body-font-family: var(--font-body);
+  --bs-body-font-size: 1.0625rem; /* 17px */
+  --bs-body-line-height: 1.65;
+  --bs-body-color: #0E1724;
+  --bs-body-bg: #FFFFFF;
+  --bs-border-radius: 0 !important;
+  --bs-border-radius-sm: 0 !important;
+  --bs-border-radius-lg: 0 !important;
+  --bs-border-radius-xl: 0 !important;
+  --bs-border-radius-2xl: 0 !important;
+  --bs-border-radius-pill: 0 !important;
+}
+
+/* Hard zero-radius and zero-shadow enforcement across all elements */
+*, *::before, *::after {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. ACCESSIBILITY & FOCUS STATES
+   -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background-color: var(--copper);
+  color: var(--white);
+  padding: 10px 20px;
+  z-index: 10000;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: top 0.15s ease-in-out;
+}
+.skip-link:focus {
+  top: 16px;
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 3px;
+}
+
+.section--graphite :focus-visible,
+.section--steel :focus-visible,
+.site-header :focus-visible,
+.site-footer :focus-visible {
+  outline: 2px solid var(--copper-light);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   3. BASE TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+body {
+  font-family: var(--font-body);
+  color: var(--graphite);
+  background-color: var(--white);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: inherit;
+  margin-top: 0;
+}
+
+/* Uppercase via CSS strictly on H1/H2 (underlying text preserved) */
+h1, .h1, h2, .h2 {
+  text-transform: uppercase;
+}
+
+h1, .h1 {
+  font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+  line-height: 1.05;
+}
+
+h2, .h2 {
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  line-height: 1.1;
+}
+
+h3, .h3 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+h4, .h4 {
+  font-size: 1.35rem;
+  line-height: 1.25;
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1.25rem;
+  max-width: 68ch;
+}
+
+.lead-text {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+/* --------------------------------------------------------------------------
+   4. BRAND IDENTITY (.brand)
+   Official Client Logo & Industrial Spec Typography
+   -------------------------------------------------------------------------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.brand__logo {
+  height: 52px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  transition: height 0.2s ease, transform 0.2s ease;
+}
+
+.site-header.scrolled .brand__logo {
+  height: 42px;
+}
+
+.brand__logo--lg {
+  height: 64px;
+}
+
+.brand__text-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand__title,
+.brand__text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.45rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1;
+  transition: color 0.15s ease;
+}
+
+.brand__title--lg {
+  font-size: 1.75rem;
+}
+
+.brand__tagline {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-top: 4px;
+  line-height: 1;
+}
+
+.brand__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background-color: var(--gold);
+  color: var(--navy);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.375rem;
+  letter-spacing: 0.06em;
+  user-select: none;
+}
+
+/* Light surface variant */
+.brand--light .brand__title,
+.brand--light .brand__text,
+.section--white .brand .brand__title,
+.section--white .brand .brand__text,
+.section--alu .brand .brand__title,
+.section--alu .brand .brand__text {
+  color: var(--navy);
+}
+
+.brand--light .brand__tagline,
+.section--white .brand .brand__tagline,
+.section--alu .brand .brand__tagline {
+  color: var(--gold-dark);
+}
+
+.brand:hover .brand__title,
+.brand:hover .brand__text {
+  color: var(--gold-light);
+}
+
+.brand--light:hover .brand__title,
+.brand--light:hover .brand__text {
+  color: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
+   5. SECTIONS & CONTAINER
+   -------------------------------------------------------------------------- */
+.container-snt {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section {
+  padding-top: var(--space-12);
+  padding-bottom: var(--space-12);
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  .section {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+}
+
+.section--white {
+  background-color: var(--white);
+  color: var(--graphite);
+}
+
+.section--alu {
+  background-color: var(--alu);
+  color: var(--graphite);
+}
+
+.section--steel {
+  background-color: var(--steel);
+  color: var(--white);
+}
+
+.section--graphite {
+  background-color: var(--graphite);
+  color: var(--white);
+}
+
+.section--ink {
+  background-color: var(--ink);
+  color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
+   6. UI UTILITIES & SPEC ELEMENTS
+   -------------------------------------------------------------------------- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--copper);
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow--light,
+.section--graphite .eyebrow,
+.section--steel .eyebrow,
+.section--ink .eyebrow {
+  color: var(--copper-light);
+}
+
+/* Dividers & Rules */
+.rule {
+  height: 1px;
+  background-color: var(--line);
+  border: 0;
+  margin: 0;
+  width: 100%;
+  display: block;
+}
+
+.rule--dark {
+  background-color: var(--line-dark);
+}
+
+.rule--copper {
+  height: 3px;
+  width: 56px;
+  background-color: var(--copper);
+  border: 0;
+  margin: 1.25rem 0 1.75rem 0;
+  display: block;
+  transform-origin: left center;
+}
+
+/* Spec Strip (Key Meta Data Display) */
+.spec-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.spec-strip__cell {
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-right: 1px solid var(--line-dark);
+}
+
+.spec-strip__cell:last-child {
+  border-right: none;
+}
+
+.spec-strip__label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--copper-light);
+}
+
+.spec-strip__value {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 767px) {
+  .spec-strip {
+    grid-template-columns: 1fr;
+  }
+  .spec-strip__cell {
+    border-right: none;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .spec-strip__cell:last-child {
+    border-bottom: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. BUTTONS & INTERACTIVE CONTROLS
+   -------------------------------------------------------------------------- */
+.btn-snt,
+.btn-snt-outline,
+.btn-snt-outline-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 28px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  line-height: 1;
+}
+
+/* Primary Button (Copper) */
+.btn-snt {
+  background-color: var(--copper);
+  border-color: var(--copper);
+  color: var(--white);
+}
+
+.btn-snt:hover,
+.btn-snt:focus {
+  background-color: var(--copper-dark);
+  border-color: var(--copper-dark);
+  color: var(--white);
+}
+
+/* Secondary Button Outline (Dark text on light) */
+.btn-snt-outline {
+  background-color: transparent;
+  border-color: var(--graphite);
+  color: var(--graphite);
+}
+
+.btn-snt-outline:hover,
+.btn-snt-outline:focus {
+  background-color: var(--graphite);
+  color: var(--white);
+}
+
+/* Secondary Button Outline Light (White outline on dark) */
+.btn-snt-outline-light {
+  background-color: transparent;
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.btn-snt-outline-light:hover,
+.btn-snt-outline-light:focus {
+  background-color: var(--white);
+  border-color: var(--white);
+  color: var(--graphite);
+}
+
+/* Link Arrow */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--copper);
+  text-decoration: none;
+  transition: gap 0.2s ease, color 0.15s ease;
+}
+
+.link-arrow i {
+  transition: transform 0.2s ease;
+}
+
+.link-arrow:hover {
+  color: var(--copper-dark);
+  gap: 12px;
+}
+
+.link-arrow:hover i {
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   8. SPEC LISTS & LEDGER TABLES
+   -------------------------------------------------------------------------- */
+/* Marker List with 8px Copper Square */
+.marker-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.marker-list__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.marker-list__item::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--copper);
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.section--graphite .marker-list__item,
+.section--steel .marker-list__item {
+  border-bottom-color: var(--line-dark);
+}
+
+/* Ledger Rows (Table-like rows with Mono number column) */
+.ledger {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.section--steel .ledger,
+.section--graphite .ledger {
+  border-top-color: var(--line-dark);
+}
+
+.ledger__row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  padding: 24px 16px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.15s ease;
+}
+
+.section--steel .ledger__row,
+.section--graphite .ledger__row {
+  border-bottom-color: var(--line-dark);
+}
+
+.ledger__row:hover {
+  background-color: var(--graphite);
+  color: var(--white);
+}
+
+.ledger__no {
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--copper-light);
+  transition: color 0.15s ease;
+}
+
+.ledger__row:hover .ledger__no {
+  color: var(--copper);
+}
+
+.ledger__title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.ledger__action {
+  font-size: 1.5rem;
+  color: var(--muted);
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+
+.ledger__row:hover .ledger__action {
+  color: var(--white);
+  transform: translate(4px, -4px);
+}
+
+@media (max-width: 575px) {
+  .ledger__row {
+    grid-template-columns: 50px 1fr auto;
+    padding: 18px 8px;
+  }
+  .ledger__title {
+    font-size: 1.25rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9. IMAGE SLOTS & PLACEHOLDERS (.img-slot)
+   Pre-allocated responsive slots with aspect ratios, corner marks, and labels.
+   -------------------------------------------------------------------------- */
+.img-slot {
+  position: relative;
+  display: block;
+  width: 100%;
+  background-color: var(--steel);
+  overflow: hidden;
+  border: 1px solid var(--line-dark);
+}
+
+/* Aspect Ratio Helpers */
+.img-slot--16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.img-slot--4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.img-slot--3-4 {
+  aspect-ratio: 3 / 4;
+}
+
+.img-slot--1-1 {
+  aspect-ratio: 1 / 1;
+}
+
+/* Top-Left Copper Corner Mark */
+.img-slot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border-top: 3px solid var(--copper);
+  border-left: 3px solid var(--copper);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Bottom-Right Subdued Corner Mark */
+.img-slot::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  border-bottom: 2px solid var(--line-dark);
+  border-right: 2px solid var(--line-dark);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Inner Real Photo / Picture */
+.img-slot picture,
+.img-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder Label when real image is absent */
+.img-slot__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  background-color: var(--graphite);
+  position: relative;
+}
+
+.img-slot__label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--copper-light);
+  line-height: 1.4;
+  background-color: rgba(16, 18, 20, 0.85);
+  padding: 8px 12px;
+  display: inline-block;
+  align-self: flex-start;
+  border-left: 2px solid var(--copper);
+}
+
+/* --------------------------------------------------------------------------
+   10. FORM STYLING
+   Square, flat, high-contrast, no glow, accessible focus rings.
+   -------------------------------------------------------------------------- */
+.form-group-snt {
+  margin-bottom: 24px;
+}
+
+.form-label-snt {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: 8px;
+}
+
+.form-control-snt,
+.form-select-snt {
+  width: 100%;
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  color: var(--graphite);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 12px 16px;
+  line-height: 1.5;
+  transition: border-color 0.15s ease;
+}
+
+.form-control-snt:focus,
+.form-select-snt:focus {
+  border-color: var(--graphite);
+  outline: none;
+}
+
+.form-control-snt::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.form-error-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--error);
+  margin-top: 6px;
+  display: none;
+}
+
+.is-invalid .form-error-text {
+  display: block;
+}
+
+.is-invalid .form-control-snt,
+.is-invalid .form-select-snt {
+  border-color: var(--error);
+}
+
+/* --------------------------------------------------------------------------
+   11. DATA-CONFIG HIDING RULE
+   Elements waiting for pending client data stay hidden until populated by JS.
+   -------------------------------------------------------------------------- */
+[data-config][hidden],
+[data-config]:not([data-config-ready]) {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   12. ANIMATION & MOTION CONTROL
+   -------------------------------------------------------------------------- */
+/* Default static visibility for no-js or fallback */
+html.no-js [data-reveal],
+html.no-js [data-reveal-stagger],
+html.no-js [data-line],
+html.no-js [data-wipe] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* When JS is enabled and motion is not reduced, prepare elements for GSAP */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  
+  html.js [data-line] {
+    transform: scaleX(0);
+    transform-origin: left center;
+  }
+}
+
+/* Strict prefers-reduced-motion reset */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal], [data-reveal-stagger], [data-line], [data-wipe] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   13. GLOBAL HEADER & NAVIGATION
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background-color: var(--graphite);
+  border-bottom: 1px solid var(--line-dark);
+  height: var(--header-height);
+  transition: height 0.2s ease, background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.site-header--scrolled {
+  height: var(--header-height-scrolled);
+}
+
+.nav-link-snt {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #B5B9BE;
+  text-decoration: none;
+  padding: 8px 0;
+  position: relative;
+  transition: color 0.15s ease;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.nav-link-snt:hover,
+.nav-link-snt:focus {
+  color: var(--white);
+}
+
+.nav-link-snt.active {
+  color: var(--white);
+}
+
+.nav-link-snt.active::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--copper);
+}
+
+/* Offcanvas Navigation for Mobile (<992px) */
+.offcanvas-snt {
+  background-color: var(--graphite) !important;
+  color: var(--white) !important;
+  border-left: 1px solid var(--line-dark);
+  width: 100% !important;
+  max-width: 420px;
+}
+
+.offcanvas-snt .offcanvas-header {
+  border-bottom: 1px solid var(--line-dark);
+  padding: 20px 24px;
+}
+
+.offcanvas-snt .offcanvas-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav-link {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.875rem; /* 30px */
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color 0.15s ease, padding-left 0.15s ease;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--copper-light);
+  padding-left: 8px;
+}
+
+.mobile-nav-link.active::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--copper);
+}
+
+/* --------------------------------------------------------------------------
+   14. GLOBAL FOOTER (.site-footer)
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background-color: var(--ink);
+  color: #B5B9BE;
+  border-top: 1px solid var(--line-dark);
+}
+
+.footer-title {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--copper-light);
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-link {
+  color: #A0A5AC;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: color 0.15s ease;
+  display: inline-block;
+}
+
+.footer-link:hover,
+.footer-link:focus {
+  color: var(--white);
+  text-decoration: underline;
+  text-decoration-color: var(--copper);
+  text-underline-offset: 4px;
+}
+
+.footer-ledger-row {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.footer-ledger-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.footer-ledger-value {
+  color: var(--white);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.footer-ledger-value a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.footer-ledger-value a:hover {
+  color: var(--copper-light);
+  text-decoration: underline;
+}
+
+.footer-bottom-bar {
+  border-top: 1px solid var(--line-dark);
+  padding: 24px 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------------------
+   15. UTILITIES: FLOATING CALL, PAGE HERO & CTA BAND
+   -------------------------------------------------------------------------- */
+.floating-call-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 52px;
+  height: 52px;
+  background-color: var(--copper);
+  color: var(--white);
+  display: none; /* Managed by main.js based on SITE.phone */
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  z-index: 1040;
+  text-decoration: none;
+  border: 1px solid var(--copper-dark);
+}
+
+.floating-call-btn:hover,
+.floating-call-btn:focus {
+  background-color: var(--copper-dark);
+  color: var(--white);
+}
+
+@media (min-width: 992px) {
+  .floating-call-btn {
+    display: none !important;
+  }
+}
+
+/* Reusable Page Hero (Compact) */
+.page-hero {
+  background-color: var(--graphite);
+  color: var(--white);
+  padding-top: 56px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.page-hero__title {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.05;
+  margin-bottom: 0.5rem;
+}
+
+/* Reusable CTA Band */
+.cta-band {
+  background-color: var(--steel);
+  color: var(--white);
+  padding-top: 64px;
+  padding-bottom: 64px;
+  border-top: 1px solid var(--line-dark);
+}
+
+.cta-band__title {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   16. HOME PAGE SPECIFIC STYLES
+   -------------------------------------------------------------------------- */
+/* Hero Section */
+.home-hero {
+  background-color: var(--graphite);
+  color: var(--white);
+  min-height: calc(90vh - var(--header-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.home-hero__title {
+  font-size: clamp(3rem, 6.5vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.home-hero__lead {
+  font-size: clamp(1.125rem, 1.8vw, 1.35rem);
+  line-height: 1.6;
+  color: #D1D5DB;
+  max-width: 58ch;
+  margin-bottom: 2.25rem;
+}
+
+.home-hero__image-wrap {
+  position: relative;
+  height: 100%;
+  min-height: 380px;
+  border-left: 1px solid var(--copper);
+}
+
+@media (max-width: 991px) {
+  .home-hero__image-wrap {
+    min-height: 320px;
+    border-left: none;
+    border-top: 1px solid var(--copper);
+    margin-top: 2rem;
+  }
+}
+
+/* Product Hover-Swap Index */
+.product-swap-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.product-swap-row {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  align-items: center;
+  padding: 22px 16px;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--graphite);
+  transition: background-color 0.2s ease, color 0.15s ease;
+}
+
+.product-swap-row:hover,
+.product-swap-row:focus,
+.product-swap-row.is-active {
+  background-color: var(--alu);
+  color: var(--graphite);
+}
+
+.product-swap-row__letter {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--copper);
+}
+
+.product-swap-row__title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.product-swap-row__arrow {
+  font-size: 1.25rem;
+  color: var(--muted);
+  transition: transform 0.2s ease, color 0.15s ease;
+}
+
+.product-swap-row:hover .product-swap-row__arrow,
+.product-swap-row:focus .product-swap-row__arrow {
+  color: var(--copper);
+  transform: translateX(4px);
+}
+
+.product-swap-stage {
+  position: sticky;
+  top: 104px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: var(--steel);
+  border: 1px solid var(--line-dark);
+  overflow: hidden;
+}
+
+.product-swap-panel {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 200ms ease;
+}
+
+.product-swap-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile Product Thumbnail */
+.product-swap-thumb {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .product-swap-stage {
+    display: none;
+  }
+  .product-swap-thumb {
+    display: block;
+    margin-top: 10px;
+  }
+  .product-swap-row {
+    display: block;
+    padding: 18px 8px;
+  }
+  .product-swap-row__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Why Choose Stacked Points */
+.why-choose-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line-dark);
+}
+
+.why-choose-item {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.why-choose-item__no {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--copper-light);
+  flex-shrink: 0;
+  width: 32px;
+}
+
+.why-choose-item__text {
+  font-size: 1.375rem; /* 22px */
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.4;
+  margin: 0;
+}
+
+@media (max-width: 575px) {
+  .why-choose-item {
+    gap: 16px;
+    padding: 18px 0;
+  }
+  .why-choose-item__text {
+    font-size: 1.125rem;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   17. ABOUT US SPECIFIC STYLES
+   -------------------------------------------------------------------------- */
+/* Copper Offset Frame for Images */
+.img-offset-frame {
+  position: relative;
+  border: 1px solid var(--copper);
+  padding: 12px;
+  background-color: var(--white);
+}
+
+.img-offset-frame .img-slot {
+  height: 100%;
+}
+
+/* Two-Tone Mission & Vision Full-Bleed Grid */
+.mission-vision-container {
+  border-top: 1px solid var(--line-dark);
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.mission-vision-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 991px) {
+  .mission-vision-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel-mission {
+  background-color: var(--steel);
+  color: var(--white);
+  padding: 80px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-right: 1px solid var(--line-dark);
+}
+
+.panel-vision {
+  background-color: var(--copper);
+  color: var(--white);
+  padding: 80px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 767px) {
+  .panel-mission,
+  .panel-vision {
+    padding: 48px 24px;
+    border-right: none;
+  }
+  .panel-mission {
+    border-bottom: 1px solid var(--line-dark);
+  }
+}
+
+.mission-vision-text {
+  font-size: clamp(1.25rem, 2vw, 1.5rem); /* up to 24px */
+  font-weight: 500;
+  line-height: 1.5;
+  margin-top: 1rem;
+  margin-bottom: 0;
+  max-width: 52ch;
+  color: var(--white);
+}
+
+/* Large Marker List for Customer Segments */
+.marker-list--large .marker-list__item {
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem); /* up to 24px */
+  font-weight: 500;
+  padding: 22px 0;
+  color: var(--graphite);
+}
+
+.marker-list--large .marker-list__item::before {
+  width: 10px;
+  height: 10px;
+  margin-top: 10px;
+}
+
+
+/* --------------------------------------------------------------------------
+   18. SERVICES SPECIFIC STYLES (Scroll-Synced Sticky Layout)
+   -------------------------------------------------------------------------- */
+.services-layout {
+  position: relative;
+}
+
+.service-sticky-panel {
+  position: sticky;
+  top: 110px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: var(--steel);
+  border: 1px solid var(--line-dark);
+  overflow: hidden;
+}
+
+.service-sync-panel {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease, visibility 250ms ease;
+}
+
+.service-sync-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.service-numeral-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--copper);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-size: 2.75rem;
+  font-weight: 700;
+  padding: 6px 18px;
+  line-height: 1;
+  z-index: 5;
+  letter-spacing: 0.02em;
+}
+
+.service-scroll-section {
+  min-height: 65vh;
+  padding: 80px 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.service-scroll-section:last-child {
+  border-bottom: none;
+}
+
+.service-scroll-section__no {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--copper);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.service-scroll-section__title {
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+
+.service-scroll-section__desc {
+  font-size: 1.25rem;
+  line-height: 1.65;
+  color: #2B3036;
+  max-width: 58ch;
+  margin-bottom: 0;
+}
+
+@media (max-width: 991px) {
+  .service-sticky-panel {
+    display: none;
+  }
+  .service-scroll-section {
+    min-height: auto;
+    padding: 48px 0;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   19. PRODUCTS CATALOGUE SPECIFIC STYLES
+   -------------------------------------------------------------------------- */
+/* Sticky Category Tab Bar */
+.products-category-bar {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 1020;
+  background-color: var(--steel);
+  border-bottom: 1px solid var(--line-dark);
+  transition: top 0.2s ease;
+}
+
+.site-header--scrolled ~ main .products-category-bar,
+.site-header--scrolled + main .products-category-bar {
+  top: var(--header-height-scrolled);
+}
+
+.category-nav-wrapper {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.category-nav-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.category-tab-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #B5B9BE;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.category-tab-link:hover,
+.category-tab-link:focus {
+  color: var(--white);
+}
+
+.category-tab-link.active {
+  color: var(--white);
+  border-bottom-color: var(--copper);
+}
+
+.category-tab-letter {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--copper-light);
+}
+
+/* Giant Category Code (A–F) */
+.category-giant-letter {
+  font-family: var(--font-mono);
+  font-size: clamp(4.5rem, 8vw, 6.5rem);
+  font-weight: 700;
+  color: var(--line);
+  line-height: 0.85;
+  user-select: none;
+  margin-bottom: 8px;
+}
+
+.section--alu .category-giant-letter {
+  color: #C8CBD0;
+}
+
+/* 2-Column Catalogue Spec Grid */
+.catalogue-spec-grid {
+  border-top: 1px solid var(--line);
+}
+
+.section--alu .catalogue-spec-grid {
+  border-top-color: #C8CBD0;
+}
+
+.catalogue-spec-col {
+  border-right: 1px solid var(--line);
+}
+
+.section--alu .catalogue-spec-col {
+  border-right-color: #C8CBD0;
+}
+
+@media (max-width: 767px) {
+  .catalogue-spec-col {
+    border-right: none;
+  }
+}
+
+.catalogue-spec-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 56px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--graphite);
+  transition: color 0.15s ease;
+}
+
+.section--alu .catalogue-spec-item {
+  border-bottom-color: #C8CBD0;
+}
+
+.catalogue-spec-item::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--copper);
+  flex-shrink: 0;
+}
+
+.catalogue-spec-item:hover {
+  color: var(--copper-dark);
+}
+
+.catalogue-section {
+  scroll-margin-top: 140px;
+}
+
+
+/* --------------------------------------------------------------------------
+   20. CONTACT US SPECIFIC STYLES
+   -------------------------------------------------------------------------- */
+.contact-details-panel {
+  background-color: var(--graphite);
+  color: var(--white);
+  padding: 48px;
+  border: 1px solid var(--line-dark);
+  height: 100%;
+}
+
+.contact-ledger-row {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.contact-ledger-row:last-child {
+  border-bottom: none;
+}
+
+.contact-ledger-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--copper-light);
+  margin-bottom: 4px;
+}
+
+.contact-ledger-value {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.4;
+}
+
+.contact-ledger-value a {
+  color: var(--white);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.contact-ledger-value a:hover {
+  color: var(--copper-light);
+  text-decoration: underline;
+}
+
+.contact-form-panel {
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--copper);
+  padding: 48px;
+}
+
+@media (max-width: 767px) {
+  .contact-details-panel,
+  .contact-form-panel {
+    padding: 32px 20px;
+  }
+}
+
+/* Neutral Bordered Form Alerts */
+.form-alert {
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.form-alert--success {
+  background-color: #F8F9FA;
+  border: 1px solid var(--copper);
+  color: var(--graphite);
+}
+
+.form-alert--error {
+  background-color: #FEF3F2;
+  border: 1px solid var(--error);
+  color: var(--error);
+}
